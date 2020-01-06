@@ -4,7 +4,7 @@
     <div class='images ' style="text-align:center; padd">
       <% images.each do |attachment| %>
         <% caption = "#{attachment.filename}#{ (' - ' + attachment.description) unless attachment.description.blank? }" %>
-        <%= link_to image_tag(url_for({:controller => 'attachments', :action => 'download', :id => attachment, :filename => attachment.filename }), :width => Setting.thumbnails_size),
+        <%= link_to image_tag(url_for({:controller => 'attachments', :action => 'download', :id => attachment, :filename => attachment.filename }), :width => Setting.thumbnails_index_size),
                     { :controller => 'attachments', :action => 'download', :id => attachment, :filename => attachment.filename },
                     :class => 'lightbox', :rel => 'thumbnails', :title => l(:label_preview) + ': ' + caption,
                     :data  => {

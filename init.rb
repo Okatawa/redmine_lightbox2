@@ -34,3 +34,25 @@ else
     AttachmentsController.send(:include, RedmineLightbox2::AttachmentsPatch)
   end
 end
+
+# Append thumbnails_index_size to settings.yml
+settings_path = Rails.root.join('config', 'settings.yml')
+settings = File.read settings_path
+settings = YAML.load settings
+
+unless settings['thumbnails_index_size']
+  settings['thumbnails_index_size'] = { 'format': 'int', 'default': 100 }
+  output = YAML.dump settings
+  File.write(settings_path, output)
+end
+
+# Append translates to ru.yml
+translates_path = Rails.root.join('config', 'locales', 'ru.yml')
+translates = File.read translates_path
+translates = YAML.load translates
+
+unless translates['ru']['setting_thumbnails_index_size']
+  translates['ru']['setting_thumbnails_index_size'] = 'Размер первью в таблице (в пикселях)'
+  output = YAML.dump translates
+  File.write(translates_path, output)
+end
